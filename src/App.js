@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import "./App.scss";
+import Navigation from "./components/header/Navigation";
+import DisplayLayout from "./components/body/DisplayLayout";
+import Footer from "./components/footer/Footer";
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredComponent, setHoveredComponent] = useState("");
+
+  const handleMenuChange = state => {
+    setMenuOpen(state);
+  };
+
+  const currentHoveredComponent = component => {
+    setHoveredComponent(component);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation
+          onMenuChange={handleMenuChange}
+          hoveredComponent={currentHoveredComponent}
+        />
+        <div className="App__container">
+          <DisplayLayout
+            navBarDisplayed={menuOpen}
+            hoveredComponent={hoveredComponent}
+          />
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

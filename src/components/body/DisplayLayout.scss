@@ -1,0 +1,101 @@
+.pages-stack {
+  z-index: 100;
+  pointer-events: none;
+  -webkit-perspective: 1200px;
+  perspective: 1200px;
+  -webkit-perspective-origin: 50% -50%;
+  perspective-origin: 50% -50%;
+
+  .page {
+    position: relative;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    pointer-events: auto;
+    background: #fff;
+    -webkit-transition: opacity 0.4s, -webkit-transform 0.4s;
+    transition: opacity 0.4s, -webkit-transform 0.4s;
+    transition: transform 0.4s, opacity 0.4s;
+    transition: transform 0.4s, opacity 0.4s, -webkit-transform 0.4s;
+    -webkit-transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+
+    &--inactive {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      opacity: 0;
+      display: none;
+    }
+  }
+
+  .page-one {
+    z-index: 130;
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  .page-two {
+    z-index: 120;
+    opacity: 0.9;
+    transform: translate3d(0px, 100%, 0px);
+  }
+
+  .page-three {
+    z-index: 110;
+    opacity: 0.8;
+    transform: translate3d(0px, 100%, 0px);
+  }
+
+  &--open {
+    .page {
+      height: 100vh;
+      overflow: hidden;
+      box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+
+      &--active {
+        cursor: pointer;
+      }
+
+      &--inactive {
+        display: block;
+      }
+    }
+    .page-one {
+      transform: translate3d(0px, 40vh, 0px);
+    }
+    .page-two {
+      transform: translate3d(0px, 40vh, -25px);
+    }
+    .page-three {
+      transform: translate3d(0px, 40vh, -50px);
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    &--open {
+      .page-one {
+        transform: translate3d(0px, 30vh, -200px);
+      }
+      .page-two {
+        transform: translate3d(0px, 30vh, -250px);
+      }
+      .page-three {
+        transform: translate3d(0px, 30vh, -300px);
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    &--open {
+      .page-one {
+        transform: translate3d(0px, 35vh, -200px);
+      }
+      .page-two {
+        transform: translate3d(0px, 35vh, -250px);
+      }
+      .page-three {
+        transform: translate3d(0px, 35vh, -300px);
+      }
+    }
+  }
+}
